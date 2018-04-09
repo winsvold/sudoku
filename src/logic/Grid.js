@@ -13,21 +13,23 @@ function createGrid(size){
 }
 
 class Grid {
-
-  constructor(){
-    this.grid = createGrid(9);
-    console.log(this.getQuadrants());
-    console.log(this.grid);
+  constructor(size){
+    this.value = createGrid(size);
+    this.size = size;
+    console.log(this.getSubGrids());
   }
-
-  getQuadrants() {
+  getGrid(){
+    return this.value.slice(0);
+  }
+  getSubGrids() {
+    const subGridSize = Math.sqrt(this.size);
     let innerGrids = [];
-    for(let i = 0; i < 3; i++) {
+    for(let i = 0; i < subGridSize; i++) {
       let row = [];
-      for (let j = 0; j < 3; j++) {
+      for (let j = 0; j < subGridSize; j++) {
         let subgrid = [];
-        for (let k = 0; k < 3; k++) {
-          subgrid.push(this.grid[i*3 + k].slice(j*3, j*3 + 3));
+        for (let k = 0; k < subGridSize; k++) {
+          subgrid.push(this.value[i*subGridSize + k].slice(j*subGridSize, j*subGridSize + subGridSize));
         }
         row.push(subgrid);
       }
@@ -35,7 +37,6 @@ class Grid {
     }
     return innerGrids;
   }
-
 }
 
 export default Grid;

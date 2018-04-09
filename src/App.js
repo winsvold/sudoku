@@ -6,35 +6,60 @@ import Grid from './logic/Grid';
 const GridDiv = styled.div`
   display: grid;
   position: relative;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 4px;
   margin: auto;
-  height: 60vw;
-  width: 60vw;
   margin-top: 10%;
+  height: 80vw;
+  width: 80vw;
   justify-content: center;
-  padding: 5px;
-  box-shadow: 0 2px 10px black;
-  > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 3vw;
-    background-color: lightblue;
-    box-shadow: inset 0 1px 3px black;
+  padding: 4px;
+  background-color: black;
+  box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.5);
+  > *:nth-child(2n){
+    > *{
+      background-color: lightgray;
+    }
   }
+`;
+
+const SubGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2px;
+  background-color: gray;
+`;
+
+const GridItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2vw;
+  background-color: white;
 `;
 
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
-    this.state = {grid: new Grid};
+    this.state = {grid: new Grid(9)};
   }
 
   render() {
-    const grid = this.state.grid.grid.map(column => column.map(element => <div>{element}</div>));
+    const grid = this.state.grid.getSubGrids().map(
+      (subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
+        <SubGrid>
+          {
+            subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
+              <GridItem>
+                {/*subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1*/}
+                {subGridRowIndex * 3 + rowIndex * 1 + 1},{subGridIndex * 3 + elementIndex + 1}
+              </GridItem>))
+          }
+        </SubGrid>
+      ));
+    console.log(grid);
     return (
       <GridDiv>
         {grid}
