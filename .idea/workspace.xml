@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dcd8e52-d1c7-4b2a-be93-85d36d20b813" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/Grid.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/Grid.js" afterDir="false" />
     </list>
@@ -20,8 +18,8 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="54" column="97" selection-start-line="54" selection-start-column="97" selection-end-line="54" selection-end-column="97" />
+            <state relative-caret-position="85">
+              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -29,8 +27,8 @@
       <file leaf-file-name="Grid.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/logic/Grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="408">
+              <caret line="62" column="11" lean-forward="true" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -104,7 +102,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-11" />
-    <option name="width" value="1698" />
+    <option name="width" value="1621" />
     <option name="height" value="1740" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -231,15 +229,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1523215103951</updated>
-      <workItem from="1523215107876" duration="12068000" />
+      <workItem from="1523215107876" duration="13906000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12068000" />
+    <option name="totallyTimeSpent" value="13906000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="970" height="994" extended-state="0" />
+    <frame x="-6" y="0" width="926" height="994" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -281,7 +279,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/logic/Grid.js</url>
+          <line>38</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -301,15 +307,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logic/Grid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="408">
+          <caret line="62" column="11" lean-forward="true" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="54" column="97" selection-start-line="54" selection-start-column="97" selection-end-line="54" selection-end-column="97" />
+        <state relative-caret-position="85">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
         </state>
       </provider>
     </entry>

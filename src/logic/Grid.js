@@ -23,19 +23,44 @@ class Grid {
   }
   getSubGrids() {
     const subGridSize = Math.sqrt(this.size);
-    let innerGrids = [];
+    let subGrids = [];
     for(let i = 0; i < subGridSize; i++) {
-      let row = [];
+      let subGridsRow = [];
       for (let j = 0; j < subGridSize; j++) {
-        let subgrid = [];
+        let subGrid = [];
         for (let k = 0; k < subGridSize; k++) {
-          subgrid.push(this.value[i*subGridSize + k].slice(j*subGridSize, j*subGridSize + subGridSize));
+          subGrid.push(this.value[i*subGridSize + k].slice(j*subGridSize, j*subGridSize + subGridSize));
         }
-        row.push(subgrid);
+        subGridsRow.push(subGrid);
       }
-      innerGrids.push(row);
+      subGrids.push(subGridsRow);
     }
-    return innerGrids;
+    return subGrids;
+  }
+
+  findNumbersInSubGrid(gridCell){
+    // TODO
+  }
+  findMissingNumbersInSubGrid(gridCell){
+    // TODO
+  }
+
+  findNumbersInRow(gridCell){
+    // TODO
+  }
+  findMissingNumbersInRow(gridCell){
+    // TODO
+  }
+
+  findNumbersInColumn(gridCell){
+    // TODO
+  }
+  findMissingNumbersInColumn(gridCell){
+    // TODO
+  }
+
+  findAllPossibleNumbersForEmptyCell(gridCell){
+    // TODO
   }
 }
 

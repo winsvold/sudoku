@@ -3,19 +3,22 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import Grid from './logic/Grid';
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(papayawhip, darkgoldenrod);
+`;
+
 const GridDiv = styled.div`
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 4px;
-  margin: auto;
-  margin-top: 10%;
-  height: 80vw;
-  width: 80vw;
-  justify-content: center;
   padding: 4px;
   background-color: black;
-  box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 1vmin 1.5vmin 4vmin rgba(0, 0, 0, 0.5);
   > *:nth-child(2n){
     > *{
       background-color: lightgray;
@@ -37,6 +40,8 @@ const GridItem = styled.div`
   font-weight: bold;
   font-size: 2vw;
   background-color: white;
+  height: 6vmin;
+  width: 6vmin;
 `;
 
 class App extends Component {
@@ -47,23 +52,25 @@ class App extends Component {
   }
 
   render() {
-    const grid = this.state.grid.getSubGrids().map(
-      (subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
+    const grid = this.state.grid
+      .getSubGrids().map((subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
         <SubGrid>
           {
             subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
               <GridItem>
                 {/*subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1*/}
-                {subGridRowIndex * 3 + rowIndex * 1 + 1},{subGridIndex * 3 + elementIndex + 1}
+                {subGridRowIndex * 3 + rowIndex},{subGridIndex * 3 + elementIndex}
               </GridItem>))
           }
         </SubGrid>
       ));
     console.log(grid);
     return (
-      <GridDiv>
-        {grid}
-      </GridDiv>
+      <Wrapper>
+        <GridDiv>
+          {grid}
+        </GridDiv>
+      </Wrapper>
     );
   }
 }
