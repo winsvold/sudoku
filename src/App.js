@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const GridDiv = styled.div`
   display: grid;
   position: relative;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${props => '1fr '.repeat(props.subGridSize)};
   grid-gap: 4px;
   padding: 4px;
   background-color: black;
@@ -28,7 +28,7 @@ const GridDiv = styled.div`
 
 const SubGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${props => '1fr '.repeat(props.subGridSize)};
   grid-gap: 2px;
   background-color: gray;
 `;
@@ -40,26 +40,27 @@ const GridItem = styled.div`
   font-weight: bold;
   font-size: 2vw;
   background-color: white;
-  height: 6vmin;
-  width: 6vmin;
+  height: 5vmin;
+  width: 5vmin;
 `;
 
 class App extends Component {
 
   constructor() {
     super();
-    this.state = {grid: new Grid(9)};
+    this.state = {grid: new Grid(16)};
   }
 
   render() {
+    const subGridSize = this.state.grid.getSubGridSize();
     const grid = this.state.grid
       .getSubGrids().map((subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
-        <SubGrid>
+        <SubGrid subGridSize={subGridSize}>
           {
             subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
               <GridItem>
                 {/*subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1*/}
-                {subGridRowIndex * 3 + rowIndex},{subGridIndex * 3 + elementIndex}
+                {subGridRowIndex * subGridSize + rowIndex},{subGridIndex * subGridSize + elementIndex}
               </GridItem>))
           }
         </SubGrid>
@@ -67,7 +68,7 @@ class App extends Component {
     console.log(grid);
     return (
       <Wrapper>
-        <GridDiv>
+        <GridDiv subGridSize={subGridSize}>
           {grid}
         </GridDiv>
       </Wrapper>

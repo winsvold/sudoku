@@ -21,8 +21,11 @@ class Grid {
   getGrid(){
     return this.value.slice(0);
   }
+  getSubGridSize(){
+    return Math.sqrt(this.size);
+  }
   getSubGrids() {
-    const subGridSize = Math.sqrt(this.size);
+    const subGridSize = this.getSubGridSize();
     let subGrids = [];
     for(let i = 0; i < subGridSize; i++) {
       let subGridsRow = [];
