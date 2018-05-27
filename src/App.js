@@ -48,7 +48,14 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = {grid: new Grid(16)};
+    this.state = {grid: new Grid(9)};
+  }
+
+  componentDidMount() {
+    const grid = this.state.grid;
+    console.log(grid.findNumbersInSubGrid({x: 2, y: 4}));
+    console.log(grid.findNumbersInRow({x: 0, y: 8}));
+    console.log(grid.findNumbersInColumn({x: 2, y: 5}));
   }
 
   render() {
@@ -59,13 +66,11 @@ class App extends Component {
           {
             subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
               <GridItem>
-                {/*subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1*/}
-                {subGridRowIndex * subGridSize + rowIndex},{subGridIndex * subGridSize + elementIndex}
+                {subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1}
               </GridItem>))
           }
         </SubGrid>
       ));
-    console.log(grid);
     return (
       <Wrapper>
         <GridDiv subGridSize={subGridSize}>
