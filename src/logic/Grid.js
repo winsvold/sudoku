@@ -23,6 +23,14 @@ class Grid {
     this.size = size;
   }
 
+  getBlueprint() {
+    let bluePrint = [];
+    for (let i = 1; i < this.size + 1; i++) {
+      bluePrint.push(i);
+    }
+    return bluePrint;
+  }
+
   getGrid() {
     return this.value.slice(0);
   }
@@ -52,17 +60,17 @@ class Grid {
     const subGridSize = this.getSubGridSize();
     const subGridX = Math.floor(gridCell.x / subGridSize);
     const subGridY = Math.floor(gridCell.y / subGridSize);
-    return {x: subGridX, y: subGridY};
-  };
+    return this.getSubGrids()[subGridY][subGridX];
+  }
 
   findNumbersInSubGrid(gridCell: GridCellCoordinate) {
-    const subGirdCoordinate = this.findSubGrid(gridCell);
-    const subgrid = this.getSubGrids()[subGirdCoordinate.y][subGirdCoordinate.x];
-    return subgrid.reduce((row, accumulator)=> [...row, ...accumulator], [] );
+    const subGrid = this.findSubGrid(gridCell);
+    return subGrid.reduce((row, accumulator)=> [...row, ...accumulator], [] );
   }
 
   findMissingNumbersInSubGrid(gridCell: GridCellCoordinate) {
-    // TODO
+    const numbersInSubGrid = this.findNumbersInSubGrid(gridCell);
+    return this.getBlueprint().filter((number) => !numbersInSubGrid.includes(number));
   }
 
   findNumbersInRow(gridCell: GridCellCoordinate) {
@@ -70,8 +78,9 @@ class Grid {
     return this.getGrid()[rowCoordinate];
   }
 
-  findMissingNumbersInRow(gridCell) {
-    // TODO
+  findMissingNumbersInRow(gridCell: GridCellCoordinate) {
+    const numbersInRow = this.findNumbersInRow(gridCell);
+    return this.getBlueprint().filter((number) => !numbersInRow.includes(number));
   }
 
   findNumbersInColumn(gridCell: GridCellCoordinate) {
@@ -81,12 +90,18 @@ class Grid {
     });
   }
 
-  findMissingNumbersInColumn(gridCell) {
-    // TODO
+  findMissingNumbersInColumn(gridCell: GridCellCoordinate) {
+    const numbersInColumn = this.findNumbersInColumn(gridCell);
+    return this.getBlueprint().filter((number) => !numbersInColumn.includes(number));
   }
 
-  findAllPossibleNumbersForEmptyCell(gridCell) {
-    // TODO
+  findAllPossibleNumbersForEmptyCell(gridCell: GridCellCoordinate) {
+    const missingNumbersInRow = this.findMissingNumbersInRow(gridCell);
+    const missingNumbersInSubGrid = this.findMissingNumbersInSubGrid(gridCell);
+    const missingNumbersInColumn = this.findMissingNumbersInColumn(gridCell);
+    return missingNumbersInColumn.filter((number) =>
+      missingNumbersInSubGrid.includes(number) && missingNumbersInRow.includes(number)
+    );
   }
 }
 

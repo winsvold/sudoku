@@ -56,6 +56,10 @@ class App extends Component {
     console.log(grid.findNumbersInSubGrid({x: 2, y: 4}));
     console.log(grid.findNumbersInRow({x: 0, y: 8}));
     console.log(grid.findNumbersInColumn({x: 2, y: 5}));
+    console.log(grid.findMissingNumbersInSubGrid({x:0, y:2}));
+    console.log(grid.findMissingNumbersInRow({x:0, y:2}));
+    console.log(grid.findMissingNumbersInColumn({x:0, y:2}));
+    console.log(grid.findAllPossibleNumbersForEmptyCell({x:3, y:3}));
   }
 
   render() {
