@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Grid from './logic/Grid';
+import SudokuBoard from './logic/SudokuBoard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,13 +48,13 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = {grid: new Grid(9)};
+    this.state = {grid: new SudokuBoard(9)};
   }
 
   componentDidMount() {
     const grid = this.state.grid;
-    console.log(grid.findNumbersInSubGrid({x: 2, y: 4}));
-    console.log(grid.findNumbersInRow({x: 0, y: 8}));
+    console.log(grid.findNumbersInSubGrid({x: 4, y: 4}));
+    console.log(grid.findNumbersInRow({x: 4, y: 4}));
     console.log(grid.findNumbersInColumn({x: 2, y: 5}));
     console.log(grid.findMissingNumbersInSubGrid({x:0, y:2}));
     console.log(grid.findMissingNumbersInRow({x:0, y:2}));

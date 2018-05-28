@@ -17,9 +17,9 @@ function createGrid(size) {
   return sudokugrid;
 }
 
-class Grid {
+class SudokuBoard {
   constructor(size) {
-    this.value = createGrid(size);
+    this.values = createGrid(size);
     this.size = size;
   }
 
@@ -32,7 +32,7 @@ class Grid {
   }
 
   getGrid() {
-    return this.value.slice(0);
+    return this.values.slice(0);
   }
 
   getSubGridSize() {
@@ -45,26 +45,31 @@ class Grid {
     for (let i = 0; i < subGridSize; i++) {
       let subGridsRow = [];
       for (let j = 0; j < subGridSize; j++) {
-        let subGrid = [];
-        for (let k = 0; k < subGridSize; k++) {
-          subGrid.push(this.value[i * subGridSize + k].slice(j * subGridSize, j * subGridSize + subGridSize));
-        }
-        subGridsRow.push(subGrid);
+        subGridsRow.push(this.getSubGrid(i, j));
       }
       subGrids.push(subGridsRow);
     }
     return subGrids;
   }
 
-  findSubGrid(gridCell: GridCellCoordinate){
+  getSubGrid(row, column) {
+    const subGridSize = this.getSubGridSize();
+    let subGrid = [];
+    for (let i = 0; i < subGridSize; i++) {
+      subGrid.push(this.values[row * subGridSize + i].slice(column * subGridSize, column * subGridSize + subGridSize));
+    }
+    return subGrid;
+  }
+
+  getSubGridForCell(gridCell: GridCellCoordinate){
     const subGridSize = this.getSubGridSize();
     const subGridX = Math.floor(gridCell.x / subGridSize);
     const subGridY = Math.floor(gridCell.y / subGridSize);
-    return this.getSubGrids()[subGridY][subGridX];
+    return this.getSubGrid(subGridY, subGridX);
   }
 
   findNumbersInSubGrid(gridCell: GridCellCoordinate) {
-    const subGrid = this.findSubGrid(gridCell);
+    const subGrid = this.getSubGridForCell(gridCell);
     return subGrid.reduce((row, accumulator)=> [...row, ...accumulator], [] );
   }
 
@@ -105,4 +110,4 @@ class Grid {
   }
 }
 
-export default Grid;
+export default SudokuBoard;
