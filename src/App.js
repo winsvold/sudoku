@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import SudokuBoard from './logic/SudokuBoard';
+import { fillBoardRandomly } from './logic/FillSudokuBoard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,29 +49,24 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = {grid: new SudokuBoard(9)};
+    this.state = {sudokuBoard: new SudokuBoard(9)};
   }
 
   componentDidMount() {
-    const grid = this.state.grid;
-    console.log(grid.findNumbersInSubGrid({x: 4, y: 4}));
-    console.log(grid.findNumbersInRow({x: 4, y: 4}));
-    console.log(grid.findNumbersInColumn({x: 2, y: 5}));
-    console.log(grid.findMissingNumbersInSubGrid({x:0, y:2}));
-    console.log(grid.findMissingNumbersInRow({x:0, y:2}));
-    console.log(grid.findMissingNumbersInColumn({x:0, y:2}));
-    console.log(grid.findAllPossibleNumbersForEmptyCell({x:3, y:3}));
+    const sudokuBoard = this.state.sudokuBoard;
+    fillBoardRandomly(sudokuBoard);
+    this.setState({});
   }
 
   render() {
-    const subGridSize = this.state.grid.getSubGridSize();
-    const grid = this.state.grid
+    const subGridSize = this.state.sudokuBoard.getSubGridSize();
+    const grid = this.state.sudokuBoard
       .getSubGrids().map((subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
         <SubGrid subGridSize={subGridSize}>
           {
             subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
               <GridItem>
-                {subGridRowIndex*27 + subGridIndex*3 + rowIndex*9 + elementIndex + 1}
+                {element}
               </GridItem>))
           }
         </SubGrid>

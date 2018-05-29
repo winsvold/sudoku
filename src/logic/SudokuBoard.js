@@ -10,7 +10,7 @@ function createGrid(size) {
   for (let i = 0; i < size; i++) {
     let row = [];
     for (let u = 0; u < size; u++) {
-      row.push(i * 9 + u + 1);
+      row.push(-1);
     }
     sudokugrid.push(row);
   }
@@ -29,6 +29,10 @@ class SudokuBoard {
       bluePrint.push(i);
     }
     return bluePrint;
+  }
+
+  setCellValue(cellCoordinate: GridCellCoordinate, newValue: number) {
+    this.values[cellCoordinate.y][cellCoordinate.x] = newValue;
   }
 
   getGrid() {
@@ -100,7 +104,7 @@ class SudokuBoard {
     return this.getBlueprint().filter((number) => !numbersInColumn.includes(number));
   }
 
-  findAllPossibleNumbersForEmptyCell(gridCell: GridCellCoordinate) {
+  findAllPossibleNumbersForCell(gridCell: GridCellCoordinate) {
     const missingNumbersInRow = this.findMissingNumbersInRow(gridCell);
     const missingNumbersInSubGrid = this.findMissingNumbersInSubGrid(gridCell);
     const missingNumbersInColumn = this.findMissingNumbersInColumn(gridCell);
