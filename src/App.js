@@ -2,7 +2,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import SudokuBoard from './logic/SudokuBoard';
-import {fillBoardRandomly, fillBoardRandomlyTheIdaWay, fillColumnRandomly} from './logic/FillSudokuBoard';
+import {fillBoardRandomlyAlwaysFillingCellWithFewestOptions} from "./logic/generatesudokuboard/fillBoardRandomlyAlwaysFillingCellWithFewestOptions";
+import {fillCellRandomly} from "./logic/generatesudokuboard/fillSudokuBoardUtils";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,22 +40,26 @@ const GridItem = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 2vw;
+  font-size: ${props => 36/props.size}vmin;
   background-color: white;
-  height: 5vmin;
-  width: 5vmin;
+  height: ${props => 81/props.size}vmin;
+  width: ${props => 81/props.size}vmin;
 `;
 
-class App extends Component {
+type State = {
+  sudokuBoard: SudokuBoard;
+};
+
+class App extends Component<{}, State> {
 
   constructor() {
     super();
-    this.state = {sudokuBoard: new SudokuBoard(9)};
+    this.state = {sudokuBoard: new SudokuBoard(16)};
   }
 
   componentDidMount() {
     const sudokuBoard = this.state.sudokuBoard;
-    fillBoardRandomlyTheIdaWay(sudokuBoard);
+    fillBoardRandomlyAlwaysFillingCellWithFewestOptions(sudokuBoard);
     this.setState({});
   }
 
@@ -62,10 +67,10 @@ class App extends Component {
     const subGridSize = this.state.sudokuBoard.getSubGridSize();
     const grid = this.state.sudokuBoard
       .getSubGrids().map((subGridRow, subGridRowIndex) => subGridRow.map((subGrid, subGridIndex) =>
-        <SubGrid subGridSize={subGridSize}>
+        <SubGrid subGridSize={subGridSize} key={`row${subGridRowIndex}column${subGridIndex}`}>
           {
             subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
-              <GridItem>
+              <GridItem key={`row${rowIndex}column${elementIndex}`} size={this.state.sudokuBoard.size}>
                 {element}
               </GridItem>))
           }

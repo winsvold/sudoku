@@ -1,9 +1,14 @@
 // @flow
 
-type GridCellCoordinate = {
+export type GridCellCoordinate = {
   y: number;
   x: number;
 };
+
+export type GridCell = {
+  coordinate: GridCellCoordinate;
+  value: number | string;
+}
 
 function createGrid(size) {
   let sudokugrid = [];
@@ -19,7 +24,10 @@ function createGrid(size) {
 
 class SudokuBoard {
 
-  constructor(size) {
+  values: number[][];
+  size: number;
+
+  constructor(size: number) {
     this.values = createGrid(size);
     this.size = size;
   }
@@ -44,6 +52,19 @@ class SudokuBoard {
     return this.values.slice(0);
   }
 
+  getAllCellsWithCoordinates(): GridCell[] {
+    let cellArray: GridCell[] = [];
+    this.getGrid().forEach((row, rowIndex) =>
+      row.forEach((cell, columnIndex) =>
+        cellArray.push({
+          coordinate: {x: columnIndex, y: rowIndex},
+          value: cell
+        })
+      )
+    );
+    return cellArray;
+  }
+
   getSubGridSize() {
     return Math.sqrt(this.size);
   }
@@ -61,7 +82,7 @@ class SudokuBoard {
     return subGrids;
   }
 
-  getSubGrid(row, column) {
+  getSubGrid(row: number, column: number) {
     const subGridSize = this.getSubGridSize();
     let subGrid = [];
     for (let i = 0; i < subGridSize; i++) {
@@ -70,7 +91,7 @@ class SudokuBoard {
     return subGrid;
   }
 
-  getSubGridForCell(gridCell: GridCellCoordinate){
+  getSubGridForCell(gridCell: GridCellCoordinate) {
     const subGridSize = this.getSubGridSize();
     const subGridX = Math.floor(gridCell.x / subGridSize);
     const subGridY = Math.floor(gridCell.y / subGridSize);
@@ -79,7 +100,7 @@ class SudokuBoard {
 
   findNumbersInSubGrid(gridCell: GridCellCoordinate) {
     const subGrid = this.getSubGridForCell(gridCell);
-    return subGrid.reduce((row, accumulator)=> [...row, ...accumulator], [] );
+    return subGrid.reduce((row, accumulator) => [...row, ...accumulator], []);
   }
 
   findMissingNumbersInSubGrid(gridCell: GridCellCoordinate) {
@@ -110,7 +131,8 @@ class SudokuBoard {
   }
 
   findAllPossibleNumbersForCell(gridCell: GridCellCoordinate) {
-    if(this.gridCellHasNumber(gridCell)){
+    if (this.gridCellHasNumber(gridCell)) {
+      console.log('Cell all ready has a value');
       return [this.getGridCellNumber(gridCell)];
     }
     const missingNumbersInRow = this.findMissingNumbersInRow(gridCell);
@@ -121,18 +143,18 @@ class SudokuBoard {
     );
   }
 
-  gridCellHasNumber(gridCell: GridCellCoordinate){
+  gridCellHasNumber(gridCell: GridCellCoordinate) {
     return this.getGrid()[gridCell.y][gridCell.x] !== '';
   }
 
-  getGridCellNumber(gridCell: GridCellCoordinate){
+  getGridCellNumber(gridCell: GridCellCoordinate) {
     return this.getGrid()[gridCell.y][gridCell.x];
   }
 
-  isValid(){
+  isValid() {
     const blueprint = this.getBlueprint();
-    return !this.getGrid().some((row)=>
-      row.some((cell)=>
+    return !this.getGrid().some((row) =>
+      row.some((cell) =>
         !blueprint.includes(cell)
       )
     );
