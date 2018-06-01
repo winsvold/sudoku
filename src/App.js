@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import SudokuBoard from './logic/SudokuBoard';
-import { fillBoardRandomly } from './logic/FillSudokuBoard';
+import {fillBoardRandomly, fillBoardRandomlyTheIdaWay, fillColumnRandomly} from './logic/FillSudokuBoard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ class App extends Component {
 
   componentDidMount() {
     const sudokuBoard = this.state.sudokuBoard;
-    fillBoardRandomly(sudokuBoard);
+    fillBoardRandomlyTheIdaWay(sudokuBoard);
     this.setState({});
   }
 
