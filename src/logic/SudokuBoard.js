@@ -24,7 +24,7 @@ function createGrid(size) {
 
 class SudokuBoard {
 
-  values: number[][];
+  values: any[][];
   size: number;
 
   constructor(size: number) {

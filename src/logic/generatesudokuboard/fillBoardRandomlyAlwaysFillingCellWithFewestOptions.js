@@ -2,15 +2,22 @@ import {fillCellRandomly, fillSubGridRandomly} from "./fillSudokuBoardUtils";
 import SudokuBoard from "../SudokuBoard";
 
 export function fillBoardRandomlyAlwaysFillingCellWithFewestOptions(board: SudokuBoard) {
-  board.clearBoard();
-  fillSubGridRandomly(board, 1, 1);
-  let error = false;
-  while (!error && !board.isValid()) {
-    error = !fillOneOfTheCellsWithFewestOptions(board);
-  }
-  if(!board.isValid()){
-    console.log('Failed to fill board');
-  }
+  let iterationCount = 0;
+  do {
+    iterationCount++;
+    console.log(iterationCount);
+    board.clearBoard();
+    fillSubGridRandomly(board, 1, 1);
+    let error = false;
+    while (!error && !board.isValid()) {
+      error = !fillOneOfTheCellsWithFewestOptions(board);
+    }
+    if (!board.isValid()) {
+      console.log('Failed to generate board');
+    } else {
+      console.log('Successfully generated board');
+    }
+  } while (!board.isValid())
 }
 
 function fillOneOfTheCellsWithFewestOptions(board: SudokuBoard) {
