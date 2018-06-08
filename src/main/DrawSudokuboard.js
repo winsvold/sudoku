@@ -40,6 +40,32 @@ type Props = {
   sudokuBoard: SudokuBoard;
 };
 
+function getRepresentation(element: number | string, subGridSize: number) {
+  if (typeof (element) === 'string') {
+    return element;
+  }
+  if(subGridSize === 4) {
+    element--;
+  }
+  if (element < 10) {
+    return element;
+  }
+  switch (element) {
+    case 10:
+      return 'A';
+    case 11:
+      return 'B';
+    case 12:
+      return 'C';
+    case 13:
+      return 'D';
+    case 14:
+      return 'E';
+    case 15:
+      return 'F';
+  }
+}
+
 function DrawBoard(props: Props) {
 
   const subGridSize = props.sudokuBoard.getSubGridSize();
@@ -49,7 +75,7 @@ function DrawBoard(props: Props) {
         {
           subGrid.map((row, rowIndex) => row.map((element, elementIndex) =>
             <GridItem key={`row${rowIndex}column${elementIndex}`} size={props.sudokuBoard.size}>
-              {element}
+              {getRepresentation(element, subGridSize)}
             </GridItem>))
         }
       </SubGrid>

@@ -1,7 +1,6 @@
 // @flow
 import React, {Component} from 'react';
 import SudokuBoard from "../logic/SudokuBoard";
-import {fillBoardRandomlyAlwaysFillingCellWithFewestOptions} from "../logic/generatesudokuboard/fillBoardRandomlyAlwaysFillingCellWithFewestOptions";
 import DrawBoard from "./DrawSudokuboard";
 import styled from 'styled-components';
 
@@ -37,16 +36,18 @@ class Main extends Component<{}, State> {
   }
 
   componentDidMount() {
-    this.generateBoard(9)
+    this.generateBoard(this.state.chosenSize)
   }
 
   generateBoard(size: number) {
     const sudokuBoard = new SudokuBoard(size);
-    fillBoardRandomlyAlwaysFillingCellWithFewestOptions(sudokuBoard);
-    this.setState({sudokuBoard: sudokuBoard});
+    sudokuBoard.generateSolution();
+    this.setState({
+      sudokuBoard: sudokuBoard
+    })
   }
 
-  sizeOnChange(event: SyntheticEvent<HTMLSelectElement>){
+  sizeOnChange(event: SyntheticEvent<HTMLSelectElement>) {
     this.setState({
       chosenSize: parseInt(event.currentTarget.value)
     });
@@ -57,7 +58,8 @@ class Main extends Component<{}, State> {
 
     return (
       <Wrapper>
-        <Button onClick={() => this.generateBoard(this.state.chosenSize)}>Generate Board</Button>
+        <Button onClick={() => this.generateBoard(this.state.chosenSize)}>Generate
+          Board</Button>
         Size:
         <Select onChange={(event) => this.sizeOnChange(event)} value={this.state.chosenSize}>
           <option value="4">4x4</option>

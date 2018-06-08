@@ -1,5 +1,7 @@
 // @flow
 
+import {fillBoardRandomlyAlwaysFillingCellWithFewestOptions} from "./generatesudokuboard/fillBoardRandomlyAlwaysFillingCellWithFewestOptions";
+
 export type GridCellCoordinate = {
   y: number;
   x: number;
@@ -34,6 +36,10 @@ class SudokuBoard {
 
   clearBoard() {
     this.values = createGrid(this.size);
+  }
+
+  generateSolution() {
+    fillBoardRandomlyAlwaysFillingCellWithFewestOptions(this);
   }
 
   getBlueprint() {
